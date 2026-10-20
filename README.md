@@ -2,7 +2,9 @@
 
 A credit-risk model that does not just decline an applicant but explains why and, where one exists, finds a concrete change that would clear the lender's cutoff. Every number in the explanation is computed and checked. The language model only rephrases.
 
-![Dashboard](docs/dashboard.png)
+<img width="1782" height="892" alt="image" src="https://github.com/user-attachments/assets/af408d20-953a-46a4-8221-b8247d9d1be6" />
+<img width="1798" height="886" alt="image" src="https://github.com/user-attachments/assets/3c6e0dd8-deae-464b-83fd-56bffe241832" />
+
 
 ## What it does
 
