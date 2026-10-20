@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Credit decisions with verified counterfactuals</title>
+<style>
+:root{--bg:#e9eef2;--panel:#fff;--ink:#16252f;--mute:#586876;--line:#d3dce4;--teal:#0f7b8a;--blue:#3b6fb6;--amber:#b8741a;--red:#a83f2e;--green:#2d7a4f;color-scheme:light}
+@media (prefers-color-scheme:dark){:root{--bg:#10181f;--panel:#19232c;--ink:#e6edf3;--mute:#94a2af;--line:#2b3844;--teal:#4fb8c7;--blue:#7ba3e0;--amber:#e0a050;--red:#e07a68;--green:#62c08a;color-scheme:dark}}
+*{box-sizing:border-box}[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 Inter,system-ui,-apple-system,"Segoe UI",sans-serif}
+h1,h2,h3{font-family:Charter,"Iowan Old Style",Georgia,serif;font-weight:600;margin:0}
+.top{background:#14303b;color:#eaf3f6;padding:22px 28px 0}
+.top h1{font-size:26px;line-height:1.2;max-width:30ch}
+.top p{margin:6px 0 16px;color:#a9c3cc;max-width:62ch;font-size:14px}
+.tabs{display:flex;gap:4px}
+.tabs button{font:inherit;font-weight:500;color:#a9c3cc;background:none;border:0;padding:10px 20px;border-radius:8px 8px 0 0;cursor:pointer}
+.tabs button[aria-selected=true]{background:var(--bg);color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+main{padding:20px 28px 48px}
+#load{max-width:520px;margin:40px auto;background:var(--panel);border:1px solid var(--line);padding:22px;border-radius:8px}
+.grid{display:grid;grid-template-columns:290px 1fr;gap:20px;align-items:start}
+@media (max-width:800px){.grid{grid-template-columns:1fr}.top,main{padding-left:16px;padding-right:16px}}
+.list{background:var(--panel);border:1px solid var(--line);border-radius:8px;max-height:80vh;overflow:auto;position:sticky;top:12px}
+.list h3{font:600 13px Inter,system-ui,sans-serif;color:var(--mute);padding:12px 14px 4px}
+.list button{display:grid;grid-template-columns:10px 1fr 52px;gap:10px;align-items:center;width:100%;font:inherit;text-align:left;background:none;border:0;border-left:3px solid transparent;padding:7px 14px 7px 11px;cursor:pointer;color:var(--ink)}
+.list button:hover{background:var(--bg)}.list button[aria-current=true]{border-color:var(--teal);background:var(--bg)}
+.dot{width:10px;height:10px;border-radius:50%}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:20px 22px;margin-bottom:16px}
+.card h3{font-size:18px;margin-bottom:10px}
+.hero{border-top:5px solid var(--c)}
+.head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px;margin-bottom:6px}
+.head h2{font-size:24px}
+.tag{padding:3px 12px;border-radius:14px;font-size:13px;font-weight:600;color:#fff;background:var(--c)}
+.m{display:grid;grid-template-columns:190px 1fr 64px;gap:12px;align-items:center;margin:10px 0}
+@media (max-width:560px){.m{grid-template-columns:1fr 64px}.m .ml{grid-column:1/-1}}
+.ml{font-size:14px}.mv{font-weight:700;text-align:right}
+.mt{position:relative;height:20px;background:var(--bg);border-radius:10px;overflow:hidden}
+.mf{height:100%;border-radius:10px}
+.mc{position:absolute;top:0;bottom:0;width:3px;background:var(--red)}
+.chg{margin-top:14px;padding-top:12px;border-top:1px solid var(--line)}
+.chg .lab{display:flex;justify-content:space-between;font-size:14px;margin-bottom:4px}
+.two{position:relative;height:14px;background:var(--bg);border-radius:7px;overflow:hidden}
+.two i{position:absolute;left:0;top:0;bottom:0;border-radius:7px}
+.kv{display:grid;grid-template-columns:repeat(auto-fit,minmax(125px,1fr));gap:12px 16px;margin-top:14px}
+.kv div{font-size:13px;color:var(--mute);background:var(--bg);padding:8px 12px;border-radius:6px}.kv strong{display:block;color:var(--ink);font-size:17px}
+ul{margin:6px 0 0;padding-left:20px}li{margin:4px 0}
+.report{max-width:68ch}
+.note{color:var(--mute);font-size:13px;max-width:72ch;margin:8px 0 0}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-bottom:16px}
+.stat{background:var(--panel);border:1px solid var(--line);border-left:5px solid var(--c);border-radius:8px;padding:14px 16px}
+.stat strong{display:block;font:600 32px Charter,Georgia,serif;color:var(--c)}.stat span{font-size:13px;color:var(--mute)}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px}@media (max-width:900px){.two-col{grid-template-columns:1fr}}
+.stack{display:flex;height:34px;border-radius:8px;overflow:hidden;margin:6px 0 4px}
+.stack div{display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px;font-weight:600}
+.srow{font-size:14px;margin-top:12px}
+.legend{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:13px;margin-top:12px}.legend i{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:6px}
+.bar{display:grid;grid-template-columns:170px 1fr 54px;gap:10px;align-items:center;margin:7px 0;font-size:14px}
+.bar .t{height:14px;background:var(--bg);border-radius:7px;overflow:hidden}.bar .f{height:100%;background:var(--red);border-radius:7px}.bar b{text-align:right}
+table{border-collapse:collapse;width:100%;font-size:14px}th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:right}th:first-child,td:first-child{text-align:left}
+th{color:var(--mute);font-weight:600}tr.hl td{background:var(--bg);font-weight:600}
+</style>
+</head>
+<body>
+<div class="top">
+  <h1>Credit decisions with verified counterfactuals</h1>
+  <p>A declined applicant gets reasons and a concrete change, and every number in the explanation is computed and checked.</p>
+  <div class="tabs" role="tablist"><button id="n-a" role="tab" aria-selected="true">Applicants</button><button id="n-s" role="tab" aria-selected="false">Findings</button></div>
+</div>
+<main>
+  <div id="load" hidden><h3>Load the data file</h3><p>Choose <code>credit_dashboard_data.json</code> from your notebook folder.</p><input type="file" id="file" accept=".json"></div>
+  <div id="app" hidden>
+    <section id="view-a" class="grid"><div class="list" id="list"></div><div id="detail"></div></section>
+    <section id="view-s" hidden></section>
+  </div>
+</main>
+<script>window.__DATA__=null;</script>
+<script>
+const $=s=>document.querySelector(s);
+const esc=t=>String(t).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+const pct=(x,d=1)=>(x*100).toFixed(d)+'%';
+const G={approved:'Approved',single_lever:'One change is enough',combination:'Needs a combination',infeasible:'No realistic path',manual_review:'Manual review'};
+const COL={approved:'var(--green)',single_lever:'var(--teal)',combination:'var(--blue)',infeasible:'var(--red)',manual_review:'var(--amber)'};
+const DRV={late_90:'90+ days late',late_30_59:'30 to 59 days late',late_60_89:'60 to 89 days late',late_code_flag:'96/98 delinquency codes',real_estate_loans:'Real estate loans',age:'Age',open_credit_lines:'Open credit lines',dependents:'Dependents'};
+const LEV={utilization:'Credit utilization',monthly_income:'Monthly income',debt_ratio:'Debt ratio'};
+let D=null;
+
+function start(d){D=d;$('#load').hidden=true;$('#app').hidden=false;buildList();show(D.applicants[0].idx);buildSummary();}
+
+function buildList(){
+  let h='';
+  for(const g of Object.keys(G)){
+    const xs=D.applicants.filter(a=>a.group===g);if(!xs.length)continue;
+    h+=`<h3>${G[g]} (${xs.length})</h3>`+xs.map(a=>`<button data-i="${a.idx}"><span class="dot" style="background:${COL[g]}"></span><span>Applicant ${a.idx}</span><span>${pct(a.pd_logistic)}</span></button>`).join('');
+  }
+  $('#list').innerHTML=h;
+  $('#list').onclick=e=>{const b=e.target.closest('button');if(b)show(+b.dataset.i)};
+}
+
+function meter(label,v,color){
+  const cut=D.summary.cutoff,max=0.5,w=Math.min(v/max,1)*100;
+  return `<div class="m"><span class="ml">${label}</span><div class="mt"><div class="mf" style="width:${w}%;background:${color}"></div><i class="mc" style="left:${cut/max*100}%"></i></div><span class="mv" style="color:${color}">${pct(v)}</span></div>`;
+}
+
+function change(o){
+  const n=LEV[o.lever]||o.lever;
+  if(o.lever==='utilization')return `<div class="chg"><div class="lab"><span>${n}</span><b>${pct(o.from_,0)} to ${pct(o.to,0)}</b></div><div class="two"><i style="width:${Math.min(o.from_,1.2)/1.2*100}%;background:var(--line)"></i><i style="width:${Math.min(o.to,1.2)/1.2*100}%;background:var(--green)"></i></div></div>`;
+  const f=v=>o.lever==='monthly_income'?Math.round(v).toLocaleString():v.toFixed(2);
+  return `<div class="chg"><div class="lab"><span>${n}</span><b>${f(o.from_)} to ${f(o.to)}</b></div></div>`;
+}
+
+function show(idx){
+  const a=D.applicants.find(x=>x.idx===idx),c=COL[a.group],f=a.features;
+  document.querySelectorAll('#list button').forEach(b=>b.setAttribute('aria-current',+b.dataset.i===idx));
+  const o=(a.options||[])[0];
+  let m=meter('Today, logistic model',a.pd_logistic,a.pd_logistic<D.summary.cutoff?'var(--green)':'var(--red)')+meter('Today, gradient boosting',a.pd_xgb,a.pd_xgb<D.summary.cutoff?'var(--green)':'var(--red)');
+  if(o)m+=meter('After the change (higher of two models)',o.new_PD,'var(--green)');
+  else if(a.group==='infeasible'&&a.floor!=null)m+=meter('Best realistic case',a.floor,'var(--amber)');
+  const kv=(k,l,fn)=>`<div>${l}<strong>${fn(f[k])}</strong></div>`;
+  const rep=esc(a.report||'No report').replace(/\*\*(.+?)\*\*/g,'<b>$1</b>').replace(/\n+/g,'<br>');
+  $('#detail').innerHTML=`
+  <div class="card hero" style="--c:${c}"><div class="head"><h2>Applicant ${a.idx}</h2><span class="tag" style="--c:${c}">${G[a.group]}</span></div>
+    ${m}<p class="note">Bars show estimated default risk from 0 to 50%. The red line is the ${pct(D.summary.cutoff,0)} approval cutoff.</p>
+    ${(a.options||[]).map(change).join('')}
+    <div class="kv">${kv('utilization','Credit utilization',v=>pct(v,0))}${kv('monthly_income','Monthly income',v=>Math.round(v).toLocaleString())}${kv('debt_ratio','Debt ratio',v=>v.toFixed(2))}${kv('late_30_59','Late 30 to 59 days',v=>v)}${kv('late_60_89','Late 60 to 89 days',v=>v)}${kv('late_90','Late 90+ days',v=>v)}</div>
+    <p class="note">In the data this applicant ${a.true_default?'defaulted within two years':'did not default'}.</p></div>
+  ${a.reasons.length?`<div class="card"><h3>Main reasons</h3><ul>${a.reasons.map(r=>`<li>${esc(r)}</li>`).join('')}</ul>${a.fixed_factors.length?`<p class="note">Cannot be changed quickly: ${a.fixed_factors.map(esc).join('; ')}.</p>`:''}</div>`:''}
+  ${a.option_texts.length?`<div class="card"><h3>Changes that clear the cutoff</h3><ul>${a.option_texts.map(t=>`<li>${esc(t)}</li>`).join('')}</ul><p class="note">A change only counts when both models put risk under the cutoff.</p></div>`:''}
+  <div class="card"><h3>Explanation written by the agent</h3><p class="report">${rep}</p><p class="note">${a.number_check&&a.number_check.length?'Unverified numbers: '+a.number_check.join(', '):'Every number in this text was checked against computed values.'}</p></div>`;
+}
+
+function bars(rows){return rows.map(r=>`<div class="bar"><span>${r[0]}</span><span class="t"><span class="f" style="display:block;width:${r[1]*100}%"></span></span><b>${pct(r[1])}</b></div>`).join('')}
+
+function stack(m){
+  const seg=[['single-lever fix exists','var(--teal)'],['combination needed','var(--blue)'],['infeasible','var(--red)']];
+  return `<div class="stack">${seg.map(s=>{const v=m[s[0]]||0;return `<div style="width:${v*100}%;background:${s[1]}">${v>0.07?pct(v,0):''}</div>`}).join('')}</div>`;
+}
+
+function buildSummary(){
+  const S=D.summary,m=S.outcome_mix,L=m['logistic only'],C=m['consensus, monotone XGB'];
+  const path=(C['single-lever fix exists']||0)+(C['combination needed']||0),lpath=(L['single-lever fix exists']||0)+(L['combination needed']||0);
+  const drv=Object.entries(S.infeasible_drivers).map(([k,v])=>[DRV[k]||k,v]);
+  const hl=S.sensitivity.find(r=>r.config==='baseline');
+  $('#view-s').innerHTML=`
+  <div class="stats">
+    <div class="stat" style="--c:var(--ink)"><strong>${pct(S.n_rejected/S.n_test)}</strong><span>of test applicants declined at a ${pct(S.cutoff,0)} default-risk cutoff</span></div>
+    <div class="stat" style="--c:var(--teal)"><strong>${pct(path,0)}</strong><span>of declined applicants have a realistic path that both models agree clears the cutoff (${pct(lpath,0)} on the logistic model alone)</span></div>
+    <div class="stat" style="--c:var(--red)"><strong>${pct(C['infeasible']||0,0)}</strong><span>have no realistic path, mostly because of payment history</span></div>
+  </div>
+  <div class="card"><h3>What can a declined applicant realistically do?</h3>
+    <div class="srow">Logistic model alone</div>${stack(L)}
+    <div class="srow">Both models must agree</div>${stack(C)}
+    <div class="legend"><span><i style="background:var(--teal)"></i>One change is enough</span><span><i style="background:var(--blue)"></i>Needs a combination</span><span><i style="background:var(--red)"></i>No realistic path</span></div>
+    <p class="note">Random sample of ${S.sample_size} declined applicants, margin of error about 3 points. Requiring a second, monotone gradient-boosted model to agree is deliberately stricter.</p></div>
+  <div class="two-col">
+    <div class="card"><h3>Why some applicants have no path</h3>${bars(drv)}<p class="note">Largest fixed driver for each applicant with no realistic path. Payment history dominates; age is almost never the driver.</p></div>
+    <div class="card"><h3>Model accuracy (AUROC)</h3>
+      <table><tr><th>Model</th><th>Test AUROC</th></tr><tr><td>Logistic regression</td><td>${S.auroc.logistic.toFixed(4)}</td></tr><tr><td>Gradient boosting, unconstrained</td><td>${S.auroc.xgb_unconstrained.toFixed(4)}</td></tr><tr><td>Gradient boosting, monotone</td><td>${S.auroc.xgb_monotone.toFixed(4)}</td></tr></table>
+      <p class="note">The monotone model costs about 0.001 AUROC and makes the counterfactual search valid, because risk can only fall when utilization falls.</p></div>
+  </div>
+  <div class="card"><h3>How much do the limits on applicant changes matter?</h3>
+    <table><tr><th>Limits</th><th>Logistic</th><th>Both models</th><th>Near miss</th></tr>
+    ${S.sensitivity.map(r=>`<tr class="${r===hl?'hl':''}"><td>${esc(r.config)}</td><td>${pct(r.feasible_logistic)}</td><td>${pct(r.feasible_consensus)}</td><td>${pct(r.near_miss_consensus)}</td></tr>`).join('')}</table>
+    <p class="note">Share of declined applicants who can reach the cutoff. Near miss: best case within 3 points above the cutoff. Income is a weak lever: allowing a 50% raise instead of 30% changes almost nothing.</p></div>`;
+}
+
+function tab(v){$('#view-a').hidden=v!=='a';$('#view-s').hidden=v!=='s';$('#n-a').setAttribute('aria-selected',v==='a');$('#n-s').setAttribute('aria-selected',v==='s')}
+$('#n-a').onclick=()=>tab('a');$('#n-s').onclick=()=>tab('s');
+$('#file').onchange=e=>{const f=e.target.files[0];if(f)f.text().then(t=>start(JSON.parse(t)))};
+if(window.__DATA__)start(window.__DATA__);
+else fetch('credit_dashboard_data.json').then(r=>r.json()).then(start).catch(()=>{$('#load').hidden=false});
+</script>
+</body>
+</html>

@@ -1,0 +1,1488 @@
+{
+ "summary": {
+  "cutoff": 0.1,
+  "n_test": 30000,
+  "n_rejected": 4615,
+  "sample_size": 1000,
+  "outcome_mix": {
+   "logistic only": {
+    "single-lever fix exists": 0.7,
+    "infeasible": 0.259,
+    "combination needed": 0.041
+   },
+   "consensus, monotone XGB": {
+    "single-lever fix exists": 0.592,
+    "infeasible": 0.36,
+    "combination needed": 0.048
+   }
+  },
+  "sensitivity": [
+   {
+    "config": "tighter",
+    "feasible_logistic": 0.681,
+    "feasible_consensus": 0.573,
+    "near_miss_consensus": 0.087
+   },
+   {
+    "config": "baseline",
+    "feasible_logistic": 0.741,
+    "feasible_consensus": 0.64,
+    "near_miss_consensus": 0.069
+   },
+   {
+    "config": "income +50%",
+    "feasible_logistic": 0.747,
+    "feasible_consensus": 0.645,
+    "near_miss_consensus": 0.069
+   },
+   {
+    "config": "util to 0",
+    "feasible_logistic": 0.766,
+    "feasible_consensus": 0.66,
+    "near_miss_consensus": 0.064
+   },
+   {
+    "config": "all relaxed",
+    "feasible_logistic": 0.781,
+    "feasible_consensus": 0.72,
+    "near_miss_consensus": 0.066
+   }
+  ],
+  "infeasible_drivers": {
+   "late_90": 0.4472,
+   "late_30_59": 0.3472,
+   "late_60_89": 0.15,
+   "late_code_flag": 0.0472,
+   "real_estate_loans": 0.0056,
+   "age": 0.0028
+  },
+  "auroc": {
+   "logistic": 0.8583752531512796,
+   "xgb_unconstrained": 0.86913554655957,
+   "xgb_monotone": 0.8677597130588424
+  }
+ },
+ "applicants": [
+  {
+   "idx": 17840,
+   "group": "single_lever",
+   "true_default": 0,
+   "pd_logistic": 0.14619874574762518,
+   "pd_xgb": 0.19576396048069,
+   "features": {
+    "utilization": 0.9999999,
+    "age": 43.0,
+    "late_30_59": 1.0,
+    "debt_ratio": 0.238702818,
+    "monthly_income": 1880.0,
+    "open_credit_lines": 1.0,
+    "late_90": 0.0,
+    "real_estate_loans": 0.0,
+    "late_60_89": 0.0,
+    "dependents": 1.0,
+    "late_code_flag": 0.0,
+    "income_missing": 0.0
+   },
+   "reasons": [
+    "High use of revolving credit limits",
+    "Recent 30-59 day late payments",
+    "Income level"
+   ],
+   "fixed_factors": [
+    "Recent 30-59 day late payments"
+   ],
+   "options": [
+    {
+     "lever": "utilization",
+     "from_": 1.0,
+     "to": 0.45,
+     "new_PD": 0.093
+    }
+   ],
+   "option_texts": [
+    "Lower revolving credit utilization from 100% to 45%: estimated default risk 9.3% (below the 10% cutoff)"
+   ],
+   "floor": 0.053,
+   "status": "ok",
+   "number_check": [],
+   "report": "Applicant 17840: DECLINED (estimated default risk 14.6%, cutoff 10%)\n\nThe model estimates the following main reasons for the decline: High use of revolving credit limits, Recent 30-59 day late payments, Income level. The factor **Recent 30-59 day late payments** cannot be changed quickly.\n\n**Option A:** Reduce revolving credit utilization from 100\u202f% to 45\u202f%. The model estimates the resulting default risk at 9.3\u202f%, which is below the 10\u202f% lender cutoff. This post\u2011change risk is the more cautious of the two models used."
+  },
+  {
+   "idx": 34305,
+   "group": "single_lever",
+   "true_default": 0,
+   "pd_logistic": 0.12313614762649826,
+   "pd_xgb": 0.1750071793794632,
+   "features": {
+    "utilization": 0.9999999,
+    "age": 27.0,
+    "late_30_59": 0.0,
+    "debt_ratio": 0.0,
+    "monthly_income": 1000.0,
+    "open_credit_lines": 0.0,
+    "late_90": 0.0,
+    "real_estate_loans": 0.0,
+    "late_60_89": 0.0,
+    "dependents": 1.0,
+    "late_code_flag": 0.0,
+    "income_missing": 0.0
+   },
+   "reasons": [
+    "High use of revolving credit limits",
+    "Income level",
+    "Number of dependents"
+   ],
+   "fixed_factors": [
+    "Number of dependents"
+   ],
+   "options": [
+    {
+     "lever": "utilization",
+     "from_": 1.0,
+     "to": 0.45,
+     "new_PD": 0.07
+    }
+   ],
+   "option_texts": [
+    "Lower revolving credit utilization from 100% to 45%: estimated default risk 7.0% (below the 10% cutoff)"
+   ],
+   "floor": 0.028,
+   "status": "ok",
+   "number_check": [],
+   "report": "Applicant 34305: DECLINED (estimated default risk 12.3%, cutoff 10%)\n\nThe model estimates the following main reasons for the decline: High use of revolving credit limits, Income level, Number of dependents. The factor **Number of dependents** cannot be changed quickly.\n\n**Option A:** Reduce revolving credit utilization from 100\u202f% to 45\u202f%. The model estimates the resulting default risk at 7.0\u202f%, which is below the 10\u202f% lender cutoff. This post\u2011change risk is the more cautious of the two models."
+  },
+  {
+   "idx": 142102,
+   "group": "single_lever",
+   "true_default": 0,
+   "pd_logistic": 0.3045027780800355,
+   "pd_xgb": 0.14604517817497253,
+   "features": {
+    "utilization": 0.9990005,
+    "age": 64.0,
+    "late_30_59": 4.0,
+    "debt_ratio": 0.230011455,
+    "monthly_income": 8729.0,
+    "open_credit_lines": 6.0,
+    "late_90": 0.0,
+    "real_estate_loans": 2.0,
+    "late_60_89": 0.0,
+    "dependents": 0.0,
+    "late_code_flag": 0.0,
+    "income_missing": 0.0
+   },
+   "reasons": [
+    "Recent 30-59 day late payments",
+    "High use of revolving credit limits",
+    "Number of real estate loans"
+   ],
+   "fixed_factors": [
+    "Recent 30-59 day late payments",
+    "Number of real estate loans"
+   ],
+   "options": [
+    {
+     "lever": "utilization",
+     "from_": 0.999,
+     "to": 0.15,
+     "new_PD": 0.089
+    }
+   ],
+   "option_texts": [
+    "Lower revolving credit utilization from 100% to 15%: estimated default risk 8.9% (below the 10% cutoff)"
+   ],
+   "floor": 0.075,
+   "status": "ok",
+   "number_check": [],
+   "report": "Applicant 142102: DECLINED (estimated default risk 30.5%, cutoff 10%)\n\n**Main reasons:** Recent 30-59 day late payments, High use of revolving credit limits, Number of real estate loans.  \nThe factors **Recent 30-59 day late payments** and **Number of real estate loans** are fixed and cannot be changed quickly.\n\n**Option A:** Reduce revolving credit utilization from 100\u202f% to 15\u202f%, which brings the estimated default risk to 8.9\u202f%\u2014below the 10\u202f% cutoff. The post\u2011change risk is the more cautious of the two models."
+  },
+  {
+   "idx": 14975,
+   "group": "single_lever",
+   "true_default": 0,
+   "pd_logistic": 0.15360482319364416,
+   "pd_xgb": 0.13625042140483856,
+   "features": {
+    "utilization": 0.971748921,
+    "age": 42.0,
+    "late_30_59": 1.0,
+    "debt_ratio": 0.419802805,
+    "monthly_income": 7200.0,
+    "open_credit_lines": 7.0,
+    "late_90": 0.0,
+    "real_estate_loans": 1.0,
+    "late_60_89": 0.0,
+    "dependents": 1.0,
+    "late_code_flag": 0.0,
+    "income_missing": 0.0
+   },
+   "reasons": [
+    "High use of revolving credit limits",
+    "Recent 30-59 day late payments",
+    "High debt relative to income"
+   ],
+   "fixed_factors": [
+    "Recent 30-59 day late payments"
+   ],
+   "options": [
+    {
+     "lever": "utilization",
+     "from_": 0.972,
+     "to": 0.65,
+     "new_PD": 0.094
+    }
+   ],
+   "option_texts": [
+    "Lower revolving credit utilization from 97% to 65%: estimated default risk 9.4% (below the 10% cutoff)"
+   ],
+   "floor": 0.037,
+   "status": "ok",
+   "number_check": [],
+   "report": "Applicant 14975: DECLINED (estimated default risk 15.4%, cutoff 10%)\n\n**Main reasons:** High use of revolving credit limits; Recent 30\u201159 day late payments; High debt relative to income.  \nThe factor **Recent 30\u201159 day late payments** cannot be changed quickly.\n\n**Option A:** Reduce your revolving\u2011credit utilization from 97\u202f% to 65\u202f%. The model estimates the default risk would fall to 9.4\u202f%, which is below the 10\u202f% lender cutoff. This post\u2011change risk reflects the more cautious of the two models used."
+  },
+  {
+   "idx": 112004,
+   "group": "single_lever",
+   "true_default": 0,
+   "pd_logistic": 0.16097397333913904,
+   "pd_xgb": 0.23134931921958923,
+   "features": {
+    "utilization": 0.9999999,
+    "age": 62.0,
+    "late_30_59": 2.0,
+    "debt_ratio": 0.29093308949999996,
+    "monthly_income": 5400.0,
+    "open_credit_lines": 9.0,
+    "late_90": 0.0,
+    "real_estate_loans": 0.0,
+    "late_60_89": 0.0,
+    "dependents": 0.0,
+    "late_code_flag": 0.0,
+    "income_missing": 1.0
+   },
+   "reasons": [
+    "High use of revolving credit limits",
+    "Recent 30-59 day late payments",
+    "Income level"
+   ],
+   "fixed_factors": [
+    "Recent 30-59 day late payments"
+   ],
+   "options": [
+    {
+     "lever": "utilization",
+     "from_": 1.0,
+     "to": 0.35,
+     "new_PD": 0.091
+    }
+   ],
+   "option_texts": [
+    "Lower revolving credit utilization from 100% to 35%: estimated default risk 9.1% (below the 10% cutoff)"
+   ],
+   "floor": 0.059,
+   "status": "ok",
+   "number_check": [],
+   "report": "Applicant 112004: DECLINED (estimated default risk 16.1%, cutoff 10%)\n\n**Main reasons:** High use of revolving credit limits, Recent 30\u201159 day late payments, Income level.  \nThe factor **Recent 30\u201159 day late payments** cannot be changed quickly.\n\n**Alternative A:** Reduce revolving credit utilization from 100\u202f% to 35\u202f%. The model estimates the resulting default risk at 9.1\u202f%, which is below the 10\u202f% cutoff. This post\u2011change risk is the more cautious of the two models."
+  },
+  {
+   "idx": 100337,
+   "group": "single_lever",
+   "true_default": 0,
+   "pd_logistic": 0.11158690807537895,
+   "pd_xgb": 0.10015945136547089,
+   "features": {
+    "utilization": 0.916615946,
+    "age": 37.0,
+    "late_30_59": 0.0,
+    "debt_ratio": 0.213511259,
+    "monthly_income": 3596.0,
+    "open_credit_lines": 13.0,
+    "late_90": 0.0,
+    "real_estate_loans": 0.0,
+    "late_60_89": 0.0,
+    "dependents": 0.0,
+    "late_code_flag": 0.0,
+    "income_missing": 0.0
+   },
+   "reasons": [
+    "High use of revolving credit limits",
+    "Number of open credit lines",
+    "Income level"
+   ],
+   "fixed_factors": [
+    "Number of open credit lines"
+   ],
+   "options": [
+    {
+     "lever": "utilization",
+     "from_": 0.917,
+     "to": 0.8,
+     "new_PD": 0.093
+    }
+   ],
+   "option_texts": [
+    "Lower revolving credit utilization from 92% to 80%: estimated default risk 9.3% (below the 10% cutoff)"
+   ],
+   "floor": 0.027,
+   "status": "ok",
+   "number_check": [],
+   "report": "Applicant 100337: DECLINED (estimated default risk 11.2%, cutoff 10%)\n\n**Main reasons:** High use of revolving credit limits, Number of open credit lines, Income level.  \nThe factor **Number of open credit lines** cannot be changed quickly.\n\n**Option A:** Reduce your revolving\u2011credit utilization from 92\u202f% to about 80\u202f%. This would bring the estimated default risk to 9.3\u202f%, which is below the 10\u202f% lender cutoff. The post\u2011change risk figure is the more cautious of the two models used."
+  },
+  {
+   "idx": 39796,
+   "group": "single_lever",
+   "true_default": 0,
+   "pd_logistic": 0.10270932837468723,
+   "pd_xgb": 0.07105424255132675,
+   "features": {
+    "utilization": 0.9999999,
+    "age": 59.0,
+    "late_30_59": 0.0,
+    "debt_ratio": 0.573895655,
+    "monthly_income": 5500.0,
+    "open_credit_lines": 10.0,
+    "late_90": 0.0,
+    "real_estate_loans": 2.0,
+    "late_60_89": 0.0,
+    "dependents": 1.0,
+    "late_code_flag": 0.0,
+    "income_missing": 0.0
+   },
+   "reasons": [
+    "High use of revolving credit limits",
+    "Number of real estate loans",
+    "High debt relative to income"
+   ],
+   "fixed_factors": [
+    "Number of real estate loans"
+   ],
+   "options": [
+    {
+     "lever": "utilization",
+     "from_": 1.0,
+     "to": 0.95,
+     "new_PD": 0.095
+    }
+   ],
+   "option_texts": [
+    "Lower revolving credit utilization from 100% to 95%: estimated default risk 9.5% (below the 10% cutoff)"
+   ],
+   "floor": 0.021,
+   "status": "ok",
+   "number_check": [],
+   "report": "Applicant 39796: DECLINED (estimated default risk 10.3%, cutoff 10%)\n\nThe model estimates the following main reasons for the decline: **High use of revolving credit limits**, **Number of real estate loans**, and **High debt relative to income**. The factor **Number of real estate loans** cannot be changed quickly.\n\n**A.** Reduce revolving\u2011credit utilization from 100\u202f% to 95\u202f%. This would lower the estimated default risk to 9.5\u202f%, which is below the 10\u202f% lender cutoff. The post\u2011change risk is the more cautious of the two models used."
+  },
+  {
+   "idx": 134397,
+   "group": "single_lever",
+   "true_default": 0,
+   "pd_logistic": 0.13234483979559195,
+   "pd_xgb": 0.09602157771587372,
+   "features": {
+    "utilization": 0.9999999,
+    "age": 23.0,
+    "late_30_59": 0.0,
+    "debt_ratio": 0.085975436,
+    "monthly_income": 3500.0,
+    "open_credit_lines": 3.0,
+    "late_90": 0.0,
+    "real_estate_loans": 0.0,
+    "late_60_89": 0.0,
+    "dependents": 1.0,
+    "late_code_flag": 0.0,
+    "income_missing": 0.0
+   },
+   "reasons": [
+    "High use of revolving credit limits",
+    "Income level",
+    "Number of dependents"
+   ],
+   "fixed_factors": [
+    "Number of dependents"
+   ],
+   "options": [
+    {
+     "lever": "utilization",
+     "from_": 1.0,
+     "to": 0.75,
+     "new_PD": 0.089
+    }
+   ],
+   "option_texts": [
+    "Lower revolving credit utilization from 100% to 75%: estimated default risk 8.9% (below the 10% cutoff)"
+   ],
+   "floor": 0.029,
+   "status": "ok",
+   "number_check": [],
+   "report": "Applicant 134397: DECLINED (estimated default risk 13.2%, cutoff 10%)\n\nThe model estimates that the main reasons for the decline are **High use of revolving credit limits**, **Income level**, and **Number of dependents**. The factor **Number of dependents** cannot be changed quickly.\n\n**Option A:** Reduce your revolving\u2011credit utilization from 100\u202f% to 75\u202f%. The model estimates the resulting default risk would be 8.9\u202f%, which is below the 10\u202f% lender cutoff. This post\u2011change risk reflects the more cautious of the two models used."
+  },
+  {
+   "idx": 3820,
+   "group": "single_lever",
+   "true_default": 0,
+   "pd_logistic": 0.10076840425093468,
+   "pd_xgb": 0.061925891786813736,
+   "features": {
+    "utilization": 0.967379078,
+    "age": 43.0,
+    "late_30_59": 0.0,
+    "debt_ratio": 0.264677419,
+    "monthly_income": 6199.0,
+    "open_credit_lines": 5.0,
+    "late_90": 0.0,
+    "real_estate_loans": 2.0,
+    "late_60_89": 0.0,
+    "dependents": 0.0,
+    "late_code_flag": 0.0,
+    "income_missing": 0.0
+   },
+   "reasons": [
+    "High use of revolving credit limits",
+    "Number of real estate loans",
+    "Income level"
+   ],
+   "fixed_factors": [
+    "Number of real estate loans"
+   ],
+   "options": [
+    {
+     "lever": "utilization",
+     "from_": 0.967,
+     "to": 0.9,
+     "new_PD": 0.09
+    },
+    {
+     "lever": "monthly_income",
+     "from_": 6199.0,
+     "to": 8100.0,
+     "new_PD": 0.095
+    }
+   ],
+   "option_texts": [
+    "Lower revolving credit utilization from 97% to 90%: estimated default risk 9.0% (below the 10% cutoff)",
+    "Raise monthly income from 6,199 to 8,100: estimated default risk 9.5% (below the 10% cutoff)"
+   ],
+   "floor": 0.022,
+   "status": "ok",
+   "number_check": [],
+   "report": "Applicant 3820: DECLINED (estimated default risk 10.1%, cutoff 10%)\n\nThe model estimates the following main reasons for the decline: **High use of revolving credit limits**, **Number of real estate loans**, **Income level**. The factor **Number of real estate loans** cannot be changed quickly.\n\n**A.** Reduce revolving\u2011credit utilization from 97\u202f% to 90\u202f%; the model estimates the resulting default risk at 9.0\u202f%, which is below the 10\u202f% cutoff.  \n\n**B.** Increase monthly income from\u202f$6,199 to\u202f$8,100; the model estimates the resulting default risk at 9.5\u202f%, also below the 10\u202f% cutoff.  \n\nThe post\u2011change risk shown for each option is the more cautious of the two models used."
+  },
+  {
+   "idx": 64514,
+   "group": "single_lever",
+   "true_default": 0,
+   "pd_logistic": 0.11984966589396971,
+   "pd_xgb": 0.09088103473186493,
+   "features": {
+    "utilization": 0.983306245,
+    "age": 47.0,
+    "late_30_59": 0.0,
+    "debt_ratio": 0.562351261,
+    "monthly_income": 4201.0,
+    "open_credit_lines": 7.0,
+    "late_90": 0.0,
+    "real_estate_loans": 1.0,
+    "late_60_89": 0.0,
+    "dependents": 3.0,
+    "late_code_flag": 0.0,
+    "income_missing": 0.0
+   },
+   "reasons": [
+    "High use of revolving credit limits",
+    "Number of dependents",
+    "Income level"
+   ],
+   "fixed_factors": [
+    "Number of dependents"
+   ],
+   "options": [
+    {
+     "lever": "utilization",
+     "from_": 0.983,
+     "to": 0.8,
+     "new_PD": 0.09
+    }
+   ],
+   "option_texts": [
+    "Lower revolving credit utilization from 98% to 80%: estimated default risk 9.0% (below the 10% cutoff)"
+   ],
+   "floor": 0.025,
+   "status": "ok",
+   "number_check": [],
+   "report": "Applicant 64514: DECLINED (estimated default risk 12.0%, cutoff 10%)\n\n**Main reasons**  \n- High use of revolving credit limits  \n- Number of dependents (this factor cannot be changed quickly)  \n- Income level  \n\n**Alternatives**  \nA. Lower revolving credit utilization from 98\u202f% to 80\u202f% \u2013 the model estimates the resulting risk is below the 10\u202f% cutoff. The post\u2011change risk is the more cautious of the two models."
+  },
+  {
+   "idx": 6770,
+   "group": "single_lever",
+   "true_default": 0,
+   "pd_logistic": 0.12003170214176888,
+   "pd_xgb": 0.08269884437322617,
+   "features": {
+    "utilization": 0.9999999,
+    "age": 40.0,
+    "late_30_59": 0.0,
+    "debt_ratio": 0.617833095,
+    "monthly_income": 4900.0,
+    "open_credit_lines": 5.0,
+    "late_90": 0.0,
+    "real_estate_loans": 1.0,
+    "late_60_89": 0.0,
+    "dependents": 1.0,
+    "late_code_flag": 0.0,
+    "income_missing": 0.0
+   },
+   "reasons": [
+    "High use of revolving credit limits",
+    "High debt relative to income",
+    "Income level"
+   ],
+   "fixed_factors": [],
+   "options": [
+    {
+     "lever": "utilization",
+     "from_": 1.0,
+     "to": 0.85,
+     "new_PD": 0.095
+    }
+   ],
+   "option_texts": [
+    "Lower revolving credit utilization from 100% to 85%: estimated default risk 9.5% (below the 10% cutoff)"
+   ],
+   "floor": 0.024,
+   "status": "ok",
+   "number_check": [],
+   "report": "Applicant 6770: DECLINED (estimated default risk 12.0%, cutoff 10%)\n\n**Main reasons:** High use of revolving credit limits, High debt relative to income, Income level. These factors cannot be changed quickly.\n\n**Alternatives:**  \nA. Lower revolving credit utilization from 100\u202f% to 85\u202f%. The model estimates the resulting risk is 9.5\u202f%, which is below the 10\u202f% cutoff. This post\u2011change risk is the more cautious of the two models."
+  },
+  {
+   "idx": 4756,
+   "group": "single_lever",
+   "true_default": 0,
+   "pd_logistic": 0.19802411889822416,
+   "pd_xgb": 0.21841320395469666,
+   "features": {
+    "utilization": 0.9999999,
+    "age": 42.0,
+    "late_30_59": 0.0,
+    "debt_ratio": 0.577446014,
+    "monthly_income": 3750.0,
+    "open_credit_lines": 6.0,
+    "late_90": 0.0,
+    "real_estate_loans": 1.0,
+    "late_60_89": 1.0,
+    "dependents": 0.0,
+    "late_code_flag": 0.0,
+    "income_missing": 0.0
+   },
+   "reasons": [
+    "High use of revolving credit limits",
+    "Recent 60-89 day late payments",
+    "Income level"
+   ],
+   "fixed_factors": [
+    "Recent 60-89 day late payments"
+   ],
+   "options": [
+    {
+     "lever": "utilization",
+     "from_": 1.0,
+     "to": 0.4,
+     "new_PD": 0.089
+    }
+   ],
+   "option_texts": [
+    "Lower revolving credit utilization from 100% to 40%: estimated default risk 8.9% (below the 10% cutoff)"
+   ],
+   "floor": 0.044,
+   "status": "ok",
+   "number_check": [],
+   "report": "Applicant 4756: DECLINED (estimated default risk 19.8%, cutoff 10%)\n\n**Main reasons:** High use of revolving credit limits, Recent 60-89 day late payments, Income level.  \nThe factor **Recent 60-89 day late payments** cannot be changed quickly.\n\n**Option A:** Reduce revolving credit utilization from 100\u202f% to 40\u202f%. This would bring the estimated default risk to 8.9\u202f%, which is below the 10\u202f% cutoff. The post\u2011change risk is the more cautious of the two models."
+  },
+  {
+   "idx": 42768,
+   "group": "single_lever",
+   "true_default": 0,
+   "pd_logistic": 0.18975221415806123,
+   "pd_xgb": 0.17556333541870117,
+   "features": {
+    "utilization": 0.933418378,
+    "age": 36.0,
+    "late_30_59": 0.0,
+    "debt_ratio": 1.393450185,
+    "monthly_income": 2167.0,
+    "open_credit_lines": 14.0,
+    "late_90": 0.0,
+    "real_estate_loans": 1.0,
+    "late_60_89": 0.0,
+    "dependents": 4.0,
+    "late_code_flag": 0.0,
+    "income_missing": 0.0
+   },
+   "reasons": [
+    "High use of revolving credit limits",
+    "High debt relative to income",
+    "Number of dependents"
+   ],
+   "fixed_factors": [
+    "Number of dependents"
+   ],
+   "options": [
+    {
+     "lever": "utilization",
+     "from_": 0.933,
+     "to": 0.45,
+     "new_PD": 0.092
+    }
+   ],
+   "option_texts": [
+    "Lower revolving credit utilization from 93% to 45%: estimated default risk 9.2% (below the 10% cutoff)"
+   ],
+   "floor": 0.044,
+   "status": "ok",
+   "number_check": [],
+   "report": "Applicant 42768: DECLINED (estimated default risk 19.0%, cutoff 10%)\n\n**Main reasons:** High use of revolving credit limits, High debt relative to income, Number of dependents.  \nThe factor **Number of dependents** cannot be changed quickly.\n\n**Option A:** Reduce revolving\u2011credit utilization from 93\u202f% to 45\u202f%, which the model estimates would lower the default risk to 9.2\u202f%\u2014below the 10\u202f% lender cutoff. This post\u2011change risk reflects the more cautious of the two models used."
+  },
+  {
+   "idx": 61017,
+   "group": "single_lever",
+   "true_default": 1,
+   "pd_logistic": 0.2434184847280308,
+   "pd_xgb": 0.28209635615348816,
+   "features": {
+    "utilization": 0.998001998,
+    "age": 30.0,
+    "late_30_59": 1.0,
+    "debt_ratio": 0.73012851,
+    "monthly_income": 2100.0,
+    "open_credit_lines": 4.0,
+    "late_90": 0.0,
+    "real_estate_loans": 0.0,
+    "late_60_89": 0.0,
+    "dependents": 6.0,
+    "late_code_flag": 0.0,
+    "income_missing": 0.0
+   },
+   "reasons": [
+    "High use of revolving credit limits",
+    "Recent 30-59 day late payments",
+    "Number of dependents"
+   ],
+   "fixed_factors": [
+    "Recent 30-59 day late payments",
+    "Number of dependents"
+   ],
+   "options": [
+    {
+     "lever": "utilization",
+     "from_": 0.998,
+     "to": 0.15,
+     "new_PD": 0.091
+    }
+   ],
+   "option_texts": [
+    "Lower revolving credit utilization from 100% to 15%: estimated default risk 9.1% (below the 10% cutoff)"
+   ],
+   "floor": 0.074,
+   "status": "ok",
+   "number_check": [],
+   "report": "Applicant 61017: DECLINED (estimated default risk 24.3%, cutoff 10%)\n\n**Main reasons:** High use of revolving credit limits; Recent 30\u201159 day late payments; Number of dependents.  \nThe factors **Recent 30\u201159 day late payments** and **Number of dependents** cannot be changed quickly.\n\n**Option A:** Reduce revolving\u2011credit utilization from 100\u202f% to about 15\u202f%. The model estimates the post\u2011change default risk at 9.1\u202f%, which is below the 10\u202f% lender cutoff. This risk figure is the more cautious of the two models used."
+  },
+  {
+   "idx": 81417,
+   "group": "combination",
+   "true_default": 0,
+   "pd_logistic": 0.15930706069129036,
+   "pd_xgb": 0.23513588309288025,
+   "features": {
+    "utilization": 0.767440928,
+    "age": 49.0,
+    "late_30_59": 1.0,
+    "debt_ratio": 1.209263259,
+    "monthly_income": 8333.0,
+    "open_credit_lines": 16.0,
+    "late_90": 0.0,
+    "real_estate_loans": 3.0,
+    "late_60_89": 0.0,
+    "dependents": 2.0,
+    "late_code_flag": 0.0,
+    "income_missing": 0.0
+   },
+   "reasons": [
+    "High use of revolving credit limits",
+    "Recent 30-59 day late payments",
+    "High debt relative to income"
+   ],
+   "fixed_factors": [
+    "Recent 30-59 day late payments"
+   ],
+   "options": [],
+   "option_texts": [
+    "Lower revolving credit utilization from 77% to 5% and raise monthly income from 8,333 to 8,400 and lower the debt-to-income ratio from 1.21 to 1.20: estimated default risk 9.6% (below the 10% cutoff)"
+   ],
+   "floor": 0.071,
+   "status": "ok",
+   "number_check": [],
+   "report": "Applicant 81417: DECLINED (estimated default risk 15.9%, cutoff 10%)\n\n**Main reasons:** High use of revolving credit limits; Recent 30-59 day late payments; High debt relative to income.  \nThe factor **Recent 30-59 day late payments** cannot be changed quickly.\n\n**Option A:** Reduce revolving credit utilization to about 5\u202f%, increase monthly income slightly to $8,400, and lower the debt\u2011to\u2011income ratio to roughly 1.20. The model estimates the post\u2011change default risk at 9.6\u202f%, which is below the 10\u202f% cutoff. This risk figure is the more cautious of the two models used."
+  },
+  {
+   "idx": 84128,
+   "group": "combination",
+   "true_default": 0,
+   "pd_logistic": 0.1643634957377997,
+   "pd_xgb": 0.31861838698387146,
+   "features": {
+    "utilization": 0.618717825,
+    "age": 54.0,
+    "late_30_59": 2.0,
+    "debt_ratio": 1.065423163,
+    "monthly_income": 3591.0,
+    "open_credit_lines": 20.0,
+    "late_90": 0.0,
+    "real_estate_loans": 1.0,
+    "late_60_89": 0.0,
+    "dependents": 0.0,
+    "late_code_flag": 0.0,
+    "income_missing": 0.0
+   },
+   "reasons": [
+    "Recent 30-59 day late payments",
+    "High use of revolving credit limits",
+    "Number of open credit lines"
+   ],
+   "fixed_factors": [
+    "Recent 30-59 day late payments",
+    "Number of open credit lines"
+   ],
+   "options": [],
+   "option_texts": [
+    "Lower revolving credit utilization from 62% to 5% and lower the debt-to-income ratio from 1.07 to 0.53: estimated default risk 9.5% (below the 10% cutoff)"
+   ],
+   "floor": 0.096,
+   "status": "ok",
+   "number_check": [],
+   "report": "Applicant 84128: DECLINED (estimated default risk 16.4%, cutoff 10%)\n\n**Main reasons:** Recent 30-59 day late payments, High use of revolving credit limits, Number of open credit lines.  \nThe factors **Recent 30-59 day late payments** and **Number of open credit lines** cannot be changed quickly.\n\n**A.** Reduce revolving\u2011credit utilization from 62\u202f% to 5\u202f% and lower the debt\u2011to\u2011income ratio from 1.07 to 0.53; the model estimates the default risk would be 9.5\u202f%, which is below the 10\u202f% cutoff. This post\u2011change risk is the more cautious of the two models."
+  },
+  {
+   "idx": 141255,
+   "group": "combination",
+   "true_default": 0,
+   "pd_logistic": 0.10824981871996107,
+   "pd_xgb": 0.14237859845161438,
+   "features": {
+    "utilization": 0.25920298,
+    "age": 39.0,
+    "late_30_59": 2.0,
+    "debt_ratio": 0.741481145,
+    "monthly_income": 2200.0,
+    "open_credit_lines": 13.0,
+    "late_90": 0.0,
+    "real_estate_loans": 0.0,
+    "late_60_89": 0.0,
+    "dependents": 3.0,
+    "late_code_flag": 0.0,
+    "income_missing": 0.0
+   },
+   "reasons": [
+    "Recent 30-59 day late payments",
+    "Income level",
+    "Number of dependents"
+   ],
+   "fixed_factors": [
+    "Recent 30-59 day late payments",
+    "Number of dependents"
+   ],
+   "options": [],
+   "option_texts": [
+    "Lower revolving credit utilization from 26% to 10% and lower the debt-to-income ratio from 0.74 to 0.49: estimated default risk 9.6% (below the 10% cutoff)"
+   ],
+   "floor": 0.091,
+   "status": "ok",
+   "number_check": [],
+   "report": "Applicant 141255: DECLINED (estimated default risk 10.8%, cutoff 10%)\n\n**Main reasons:** Recent 30-59 day late payments, Income level, Number of dependents.  \nThe factors **Recent 30-59 day late payments** and **Number of dependents** cannot be changed quickly.\n\n**Option A:** Reduce revolving credit utilization to about 10\u202f% and bring the debt\u2011to\u2011income ratio down to roughly 0.49. The model estimates the default risk would fall to 9.6\u202f%, which is below the 10\u202f% cutoff. This post\u2011change risk is the more cautious of the two models used."
+  },
+  {
+   "idx": 38496,
+   "group": "combination",
+   "true_default": 1,
+   "pd_logistic": 0.11614607446551391,
+   "pd_xgb": 0.16581693291664124,
+   "features": {
+    "utilization": 0.493459771,
+    "age": 47.0,
+    "late_30_59": 1.0,
+    "debt_ratio": 1.448357925,
+    "monthly_income": 2100.0,
+    "open_credit_lines": 17.0,
+    "late_90": 0.0,
+    "real_estate_loans": 2.0,
+    "late_60_89": 0.0,
+    "dependents": 0.0,
+    "late_code_flag": 0.0,
+    "income_missing": 0.0
+   },
+   "reasons": [
+    "Recent 30-59 day late payments",
+    "High use of revolving credit limits",
+    "High debt relative to income"
+   ],
+   "fixed_factors": [
+    "Recent 30-59 day late payments"
+   ],
+   "options": [],
+   "option_texts": [
+    "Lower revolving credit utilization from 49% to 10% and lower the debt-to-income ratio from 1.45 to 0.72: estimated default risk 9.5% (below the 10% cutoff)"
+   ],
+   "floor": 0.095,
+   "status": "ok",
+   "number_check": [],
+   "report": "Applicant 38496: DECLINED (estimated default risk 11.6%, cutoff 10%)\n\n**Main reasons:** Recent 30\u201159 day late payments, High use of revolving credit limits, High debt relative to income.  \nThe factor **Recent 30\u201159 day late payments** cannot be changed quickly.\n\n**Alternative A:** Reduce revolving\u2011credit utilization to about 10\u202f% and bring the debt\u2011to\u2011income ratio down to roughly 0.72. The model estimates the post\u2011change default risk at 9.5\u202f%, which is below the 10\u202f% cutoff. This risk figure is the more cautious estimate of the two models used."
+  },
+  {
+   "idx": 97273,
+   "group": "infeasible",
+   "true_default": 0,
+   "pd_logistic": 0.21221389023623002,
+   "pd_xgb": 0.36847880482673645,
+   "features": {
+    "utilization": 0.9999999,
+    "age": 50.0,
+    "late_30_59": 1.0,
+    "debt_ratio": 0.119768191,
+    "monthly_income": 6211.0,
+    "open_credit_lines": 3.0,
+    "late_90": 1.0,
+    "real_estate_loans": 0.0,
+    "late_60_89": 0.0,
+    "dependents": 1.0,
+    "late_code_flag": 0.0,
+    "income_missing": 0.0
+   },
+   "reasons": [
+    "High use of revolving credit limits",
+    "90+ day late payments",
+    "Recent 30-59 day late payments"
+   ],
+   "fixed_factors": [
+    "90+ day late payments",
+    "Recent 30-59 day late payments"
+   ],
+   "options": [],
+   "option_texts": [],
+   "floor": 0.129,
+   "status": "infeasible",
+   "number_check": [],
+   "report": "Applicant 97273: DECLINED (estimated default risk 21.2%, cutoff 10%)\n\nThe model estimates that the primary reasons for the decline are:\n\n- High use of revolving credit limits  \n- 90+ day late payments (fixed factor)  \n- Recent 30\u201159 day late payments (fixed factor)\n\nBecause the 90+ day and recent 30\u201159 day late payments are fixed factors, they cannot be changed quickly. Additionally, no realistic adjustment to utilization, income, or debt ratio would bring the estimated default risk below the lender\u2019s cutoff at this time.\n\nThe best\u2011case scenario the model estimates would lower the risk to 12.9%, which still exceeds the 10.0% cutoff."
+  },
+  {
+   "idx": 63796,
+   "group": "infeasible",
+   "true_default": 1,
+   "pd_logistic": 0.17627709383331686,
+   "pd_xgb": 0.3735743463039398,
+   "features": {
+    "utilization": 0.713198371,
+    "age": 61.0,
+    "late_30_59": 1.0,
+    "debt_ratio": 0.37797412,
+    "monthly_income": 14373.0,
+    "open_credit_lines": 18.0,
+    "late_90": 1.0,
+    "real_estate_loans": 5.0,
+    "late_60_89": 0.0,
+    "dependents": 0.0,
+    "late_code_flag": 0.0,
+    "income_missing": 0.0
+   },
+   "reasons": [
+    "High use of revolving credit limits",
+    "90+ day late payments",
+    "Recent 30-59 day late payments"
+   ],
+   "fixed_factors": [
+    "90+ day late payments",
+    "Recent 30-59 day late payments"
+   ],
+   "options": [],
+   "option_texts": [],
+   "floor": 0.11,
+   "status": "infeasible",
+   "number_check": [],
+   "report": "Applicant 63796: DECLINED (estimated default risk 17.6%, cutoff 10%)\n\nThe model estimates the following main reasons for the decline: **High use of revolving credit limits**, **90+ day late payments**, **Recent 30-59 day late payments**. The factors **90+ day late payments** and **Recent 30-59 day late payments** are fixed and cannot be changed quickly.\n\nGiven the current profile, no realistic change in utilization, income, or debt ratio would bring the estimated default risk below the lender\u2019s cutoff. The best\u2011case risk the model estimates is **11.0\u202f%**, which still exceeds the required 10.0\u202f% threshold. Consequently, there are no viable alternatives to improve the outcome at this time."
+  },
+  {
+   "idx": 75482,
+   "group": "infeasible",
+   "true_default": 1,
+   "pd_logistic": 0.1297687362142217,
+   "pd_xgb": 0.10675730556249619,
+   "features": {
+    "utilization": 0.022255555,
+    "age": 40.0,
+    "late_30_59": 4.0,
+    "debt_ratio": 0.026303646,
+    "monthly_income": 2166.0,
+    "open_credit_lines": 16.0,
+    "late_90": 0.0,
+    "real_estate_loans": 0.0,
+    "late_60_89": 0.0,
+    "dependents": 0.0,
+    "late_code_flag": 0.0,
+    "income_missing": 0.0
+   },
+   "reasons": [
+    "Recent 30-59 day late payments",
+    "Number of open credit lines",
+    "Income level"
+   ],
+   "fixed_factors": [
+    "Recent 30-59 day late payments",
+    "Number of open credit lines"
+   ],
+   "options": [],
+   "option_texts": [],
+   "floor": 0.127,
+   "status": "infeasible",
+   "number_check": [],
+   "report": "Applicant 75482: DECLINED (estimated default risk 13.0%, cutoff 10%)\n\nThe main reasons for the decline are:\n\n- Recent 30-59 day late payments  \n- Number of open credit lines  \n- Income level  \n\nThe factors **Recent 30-59 day late payments** and **Number of open credit lines** cannot be changed quickly.\n\nAt this time, no realistic change in utilization, income, or debt ratio is enough to bring the estimated default risk below the lender\u2019s cutoff. The best\u2011case risk the model estimates is **12.7\u202f%**, which remains above the required 10\u202f% threshold."
+  },
+  {
+   "idx": 81312,
+   "group": "infeasible",
+   "true_default": 0,
+   "pd_logistic": 0.7857899617213431,
+   "pd_xgb": 0.3672366142272949,
+   "features": {
+    "utilization": 2.0,
+    "age": 47.0,
+    "late_30_59": 4.0,
+    "debt_ratio": 0.414577871,
+    "monthly_income": 9534.0,
+    "open_credit_lines": 9.0,
+    "late_90": 0.0,
+    "real_estate_loans": 1.0,
+    "late_60_89": 0.0,
+    "dependents": 1.0,
+    "late_code_flag": 0.0,
+    "income_missing": 0.0
+   },
+   "reasons": [
+    "High use of revolving credit limits",
+    "Recent 30-59 day late payments",
+    "High debt relative to income"
+   ],
+   "fixed_factors": [
+    "Recent 30-59 day late payments"
+   ],
+   "options": [],
+   "option_texts": [],
+   "floor": 0.101,
+   "status": "infeasible",
+   "number_check": [],
+   "report": "Applicant 81312: DECLINED (estimated default risk 78.6%, cutoff 10%)\n\nThe model estimates the following main reasons for the decline: **High use of revolving credit limits**, **Recent 30-59 day late payments**, and **High debt relative to income**. The factor **Recent 30-59 day late payments** is a fixed factor and cannot be changed quickly.\n\nThe model estimates that no realistic change in utilization, income, or debt ratio is enough to bring the estimated default risk below the lender\u2019s cutoff at this time. The best\u2011case risk the model estimates is **10.1\u202f%**, which still exceeds the required threshold."
+  },
+  {
+   "idx": 127072,
+   "group": "infeasible",
+   "true_default": 1,
+   "pd_logistic": 0.29610279084413194,
+   "pd_xgb": 0.3917063772678375,
+   "features": {
+    "utilization": 0.982289636,
+    "age": 32.0,
+    "late_30_59": 0.0,
+    "debt_ratio": 1.311953353,
+    "monthly_income": 2400.0,
+    "open_credit_lines": 7.0,
+    "late_90": 1.0,
+    "real_estate_loans": 2.0,
+    "late_60_89": 0.0,
+    "dependents": 1.0,
+    "late_code_flag": 0.0,
+    "income_missing": 0.0
+   },
+   "reasons": [
+    "High use of revolving credit limits",
+    "90+ day late payments",
+    "High debt relative to income"
+   ],
+   "fixed_factors": [
+    "90+ day late payments"
+   ],
+   "options": [],
+   "option_texts": [],
+   "floor": 0.118,
+   "status": "infeasible",
+   "number_check": [],
+   "report": "Applicant 127072: DECLINED (estimated default risk 29.6%, cutoff 10%)\n\nThe model estimates the following main reasons for the decline: **High use of revolving credit limits**, **90+ day late payments**, and **High debt relative to income**. The factor **90+ day late payments** is a fixed factor and cannot be changed quickly.\n\nAt this time, no realistic change in utilization, income, or debt\u2011to\u2011income ratio is enough to bring the estimated default risk below the lender\u2019s cutoff. The best\u2011case risk the model estimates is **11.8\u202f%**, which still exceeds the required 10\u202f% threshold."
+  },
+  {
+   "idx": 124210,
+   "group": "infeasible",
+   "true_default": 1,
+   "pd_logistic": 0.945400086607816,
+   "pd_xgb": 0.8750690817832947,
+   "features": {
+    "utilization": 1.038365395,
+    "age": 38.0,
+    "late_30_59": 3.0,
+    "debt_ratio": 0.644142066,
+    "monthly_income": 4335.0,
+    "open_credit_lines": 8.0,
+    "late_90": 2.0,
+    "real_estate_loans": 1.0,
+    "late_60_89": 3.0,
+    "dependents": 3.0,
+    "late_code_flag": 0.0,
+    "income_missing": 0.0
+   },
+   "reasons": [
+    "Recent 60-89 day late payments",
+    "90+ day late payments",
+    "High use of revolving credit limits"
+   ],
+   "fixed_factors": [
+    "Recent 60-89 day late payments",
+    "90+ day late payments"
+   ],
+   "options": [],
+   "option_texts": [],
+   "floor": 0.748,
+   "status": "infeasible",
+   "number_check": [],
+   "report": "Applicant 124210: DECLINED (estimated default risk 94.5%, cutoff 10%)\n\nThe model estimates the following main reasons for the decline: Recent 60\u201189 day late payments, 90+ day late payments, and High use of revolving credit limits. The first two factors are fixed and cannot be changed quickly.\n\nAt this time, no realistic change in utilization, income, or debt ratio is enough to bring the estimated default risk below the lender\u2019s cutoff. The best\u2011case risk the model estimates is 74.8%, which remains well above the 10.0% threshold."
+  },
+  {
+   "idx": 68023,
+   "group": "infeasible",
+   "true_default": 1,
+   "pd_logistic": 0.3172661106079219,
+   "pd_xgb": 0.41938358545303345,
+   "features": {
+    "utilization": 0.896083133,
+    "age": 23.0,
+    "late_30_59": 0.0,
+    "debt_ratio": 0.04147926,
+    "monthly_income": 2000.0,
+    "open_credit_lines": 3.0,
+    "late_90": 1.0,
+    "real_estate_loans": 0.0,
+    "late_60_89": 1.0,
+    "dependents": 0.0,
+    "late_code_flag": 0.0,
+    "income_missing": 0.0
+   },
+   "reasons": [
+    "High use of revolving credit limits",
+    "90+ day late payments",
+    "Recent 60-89 day late payments"
+   ],
+   "fixed_factors": [
+    "90+ day late payments",
+    "Recent 60-89 day late payments"
+   ],
+   "options": [],
+   "option_texts": [],
+   "floor": 0.136,
+   "status": "infeasible",
+   "number_check": [],
+   "report": "Applicant 68023: DECLINED (estimated default risk 31.7%, cutoff 10%)\n\nThe model estimates the following main reasons for the decline: **High use of revolving credit limits**, **90+ day late payments**, **Recent 60-89 day late payments**.  \n\nThe factors **90+ day late payments** and **Recent 60-89 day late payments** are fixed factors and cannot be changed quickly.  \n\nGiven the current profile, no realistic change in utilization, income, or debt ratio would bring the estimated default risk below the lender\u2019s cutoff at this time. The best\u2011case risk the model estimates is **13.6\u202f%**, which still exceeds the required 10\u202f% threshold."
+  },
+  {
+   "idx": 55460,
+   "group": "infeasible",
+   "true_default": 1,
+   "pd_logistic": 0.43631966805684075,
+   "pd_xgb": 0.6664215326309204,
+   "features": {
+    "utilization": 0.9999999,
+    "age": 44.0,
+    "late_30_59": 1.0,
+    "debt_ratio": 0.263248451,
+    "monthly_income": 2905.0,
+    "open_credit_lines": 3.0,
+    "late_90": 1.0,
+    "real_estate_loans": 0.0,
+    "late_60_89": 1.0,
+    "dependents": 5.0,
+    "late_code_flag": 0.0,
+    "income_missing": 0.0
+   },
+   "reasons": [
+    "High use of revolving credit limits",
+    "90+ day late payments",
+    "Recent 60-89 day late payments"
+   ],
+   "fixed_factors": [
+    "90+ day late payments",
+    "Recent 60-89 day late payments"
+   ],
+   "options": [],
+   "option_texts": [],
+   "floor": 0.283,
+   "status": "infeasible",
+   "number_check": [],
+   "report": "Applicant 55460: DECLINED (estimated default risk 43.6%, cutoff 10%)\n\nThe model estimates the following main reasons for the decline: **High use of revolving credit limits**, **90+ day late payments**, **Recent 60-89 day late payments**. The factors **90+ day late payments** and **Recent 60-89 day late payments** are fixed and cannot be changed quickly.\n\nThe model estimates that no realistic change in utilization, income, or debt ratio is enough to bring the risk below the lender\u2019s cutoff at this time. The best\u2011case risk the model estimates is **28.3\u202f%**, which remains well above the required **10\u202f%** threshold."
+  },
+  {
+   "idx": 10117,
+   "group": "infeasible",
+   "true_default": 0,
+   "pd_logistic": 0.6274068916151665,
+   "pd_xgb": 0.2902936041355133,
+   "features": {
+    "utilization": 0.9999999,
+    "age": 57.0,
+    "late_30_59": 6.0,
+    "debt_ratio": 0.61829436,
+    "monthly_income": 7269.0,
+    "open_credit_lines": 12.0,
+    "late_90": 0.0,
+    "real_estate_loans": 2.0,
+    "late_60_89": 0.0,
+    "dependents": 2.0,
+    "late_code_flag": 0.0,
+    "income_missing": 0.0
+   },
+   "reasons": [
+    "Recent 30-59 day late payments",
+    "High use of revolving credit limits",
+    "Number of open credit lines"
+   ],
+   "fixed_factors": [
+    "Recent 30-59 day late payments",
+    "Number of open credit lines"
+   ],
+   "options": [],
+   "option_texts": [],
+   "floor": 0.232,
+   "status": "infeasible",
+   "number_check": [],
+   "report": "Applicant 10117: DECLINED (estimated default risk 62.7%, cutoff 10%)\n\nThe model estimates that the following factors are limiting approval:\n\n- Recent 30\u201159 day late payments (a fixed factor that cannot be changed quickly)  \n- High use of revolving credit limits  \n- Number of open credit lines (a fixed factor that cannot be changed quickly)\n\nAt this time, no realistic change in utilization, income, or debt ratio would bring the estimated default risk low enough for approval. The best\u2011case scenario the model estimates would still leave the risk at about 23.2\u202f%, which remains well above the lender\u2019s 10.0\u202f% cutoff."
+  },
+  {
+   "idx": 145636,
+   "group": "infeasible",
+   "true_default": 1,
+   "pd_logistic": 0.58722838657152,
+   "pd_xgb": 0.5162436962127686,
+   "features": {
+    "utilization": 0.9999999,
+    "age": 53.0,
+    "late_30_59": 2.0,
+    "debt_ratio": 0.001818549,
+    "monthly_income": 4948.0,
+    "open_credit_lines": 1.0,
+    "late_90": 3.0,
+    "real_estate_loans": 0.0,
+    "late_60_89": 0.0,
+    "dependents": 0.0,
+    "late_code_flag": 0.0,
+    "income_missing": 0.0
+   },
+   "reasons": [
+    "90+ day late payments",
+    "High use of revolving credit limits",
+    "Recent 30-59 day late payments"
+   ],
+   "fixed_factors": [
+    "90+ day late payments",
+    "Recent 30-59 day late payments"
+   ],
+   "options": [],
+   "option_texts": [],
+   "floor": 0.243,
+   "status": "infeasible",
+   "number_check": [],
+   "report": "Applicant 145636: DECLINED (estimated default risk 58.7%, cutoff 10%)\n\nThe model estimates that the main reasons for the decline are **90+ day late payments** and **Recent 30\u201159 day late payments**. These factors cannot be changed quickly. Additionally, **High use of revolving credit limits** contributes to the risk assessment.\n\nThe model estimates that no realistic change in utilization, income, or debt\u2011to\u2011income ratio is enough to bring the estimated default risk below the lender\u2019s cutoff at this time. The best\u2011case scenario would still leave the estimated default risk at **24.3\u202f%**, which remains well above the 10\u202f% cutoff."
+  },
+  {
+   "idx": 12132,
+   "group": "manual_review",
+   "true_default": 1,
+   "pd_logistic": 0.48742457160634234,
+   "pd_xgb": 0.6511021256446838,
+   "features": {
+    "utilization": 0.9999999,
+    "age": 50.0,
+    "late_30_59": 0.0,
+    "debt_ratio": 0.0,
+    "monthly_income": 1350.0,
+    "open_credit_lines": 0.0,
+    "late_90": 0.0,
+    "real_estate_loans": 0.0,
+    "late_60_89": 0.0,
+    "dependents": 0.0,
+    "late_code_flag": 1.0,
+    "income_missing": 0.0
+   },
+   "reasons": [],
+   "fixed_factors": [],
+   "options": [],
+   "option_texts": [],
+   "floor": null,
+   "status": null,
+   "number_check": [],
+   "report": "Applicant 12132: DECLINED by model (estimated default risk 48.7%). REFERRED FOR MANUAL REVIEW: the credit file contains special delinquency codes (96/98) that may be data placeholders; automated reasons and recommendations withheld."
+  },
+  {
+   "idx": 9279,
+   "group": "manual_review",
+   "true_default": 0,
+   "pd_logistic": 0.5994532723951139,
+   "pd_xgb": 0.47413936257362366,
+   "features": {
+    "utilization": 0.9999999,
+    "age": 24.0,
+    "late_30_59": 0.0,
+    "debt_ratio": 0.0,
+    "monthly_income": 1488.0,
+    "open_credit_lines": 0.0,
+    "late_90": 0.0,
+    "real_estate_loans": 0.0,
+    "late_60_89": 0.0,
+    "dependents": 0.0,
+    "late_code_flag": 1.0,
+    "income_missing": 0.0
+   },
+   "reasons": [],
+   "fixed_factors": [],
+   "options": [],
+   "option_texts": [],
+   "floor": null,
+   "status": null,
+   "number_check": [],
+   "report": "Applicant 9279: DECLINED by model (estimated default risk 59.9%). REFERRED FOR MANUAL REVIEW: the credit file contains special delinquency codes (96/98) that may be data placeholders; automated reasons and recommendations withheld."
+  },
+  {
+   "idx": 42752,
+   "group": "manual_review",
+   "true_default": 0,
+   "pd_logistic": 0.6167738835633536,
+   "pd_xgb": 0.3227918744087219,
+   "features": {
+    "utilization": 0.9999999,
+    "age": 22.0,
+    "late_30_59": 0.0,
+    "debt_ratio": 0.0,
+    "monthly_income": 201.0,
+    "open_credit_lines": 0.0,
+    "late_90": 0.0,
+    "real_estate_loans": 0.0,
+    "late_60_89": 0.0,
+    "dependents": 0.0,
+    "late_code_flag": 1.0,
+    "income_missing": 0.0
+   },
+   "reasons": [],
+   "fixed_factors": [],
+   "options": [],
+   "option_texts": [],
+   "floor": null,
+   "status": null,
+   "number_check": [],
+   "report": "Applicant 42752: DECLINED by model (estimated default risk 61.7%). REFERRED FOR MANUAL REVIEW: the credit file contains special delinquency codes (96/98) that may be data placeholders; automated reasons and recommendations withheld."
+  },
+  {
+   "idx": 89602,
+   "group": "manual_review",
+   "true_default": 0,
+   "pd_logistic": 0.42765763698996156,
+   "pd_xgb": 0.7201335430145264,
+   "features": {
+    "utilization": 0.9999999,
+    "age": 59.0,
+    "late_30_59": 0.0,
+    "debt_ratio": 0.29093308949999996,
+    "monthly_income": 5400.0,
+    "open_credit_lines": 0.0,
+    "late_90": 0.0,
+    "real_estate_loans": 0.0,
+    "late_60_89": 0.0,
+    "dependents": 0.0,
+    "late_code_flag": 1.0,
+    "income_missing": 1.0
+   },
+   "reasons": [],
+   "fixed_factors": [],
+   "options": [],
+   "option_texts": [],
+   "floor": null,
+   "status": null,
+   "number_check": [],
+   "report": "Applicant 89602: DECLINED by model (estimated default risk 42.8%). REFERRED FOR MANUAL REVIEW: the credit file contains special delinquency codes (96/98) that may be data placeholders; automated reasons and recommendations withheld."
+  },
+  {
+   "idx": 66593,
+   "group": "approved",
+   "true_default": 0,
+   "pd_logistic": 0.0318012169537886,
+   "pd_xgb": 0.025005139410495758,
+   "features": {
+    "utilization": 0.039831994,
+    "age": 33.0,
+    "late_30_59": 0.0,
+    "debt_ratio": 0.641123275,
+    "monthly_income": 2100.0,
+    "open_credit_lines": 10.0,
+    "late_90": 0.0,
+    "real_estate_loans": 1.0,
+    "late_60_89": 0.0,
+    "dependents": 0.0,
+    "late_code_flag": 0.0,
+    "income_missing": 0.0
+   },
+   "reasons": [],
+   "fixed_factors": [],
+   "options": [],
+   "option_texts": [],
+   "floor": null,
+   "status": null,
+   "number_check": [],
+   "report": "Applicant 66593: APPROVED (estimated default risk 3.2%, cutoff 10%)"
+  },
+  {
+   "idx": 80050,
+   "group": "approved",
+   "true_default": 0,
+   "pd_logistic": 0.017233544575389413,
+   "pd_xgb": 0.005641710478812456,
+   "features": {
+    "utilization": 0.038312609,
+    "age": 69.0,
+    "late_30_59": 0.0,
+    "debt_ratio": 0.29093308949999996,
+    "monthly_income": 5400.0,
+    "open_credit_lines": 19.0,
+    "late_90": 0.0,
+    "real_estate_loans": 1.0,
+    "late_60_89": 0.0,
+    "dependents": 0.0,
+    "late_code_flag": 0.0,
+    "income_missing": 1.0
+   },
+   "reasons": [],
+   "fixed_factors": [],
+   "options": [],
+   "option_texts": [],
+   "floor": null,
+   "status": null,
+   "number_check": [],
+   "report": "Applicant 80050: APPROVED (estimated default risk 1.7%, cutoff 10%)"
+  },
+  {
+   "idx": 46727,
+   "group": "approved",
+   "true_default": 0,
+   "pd_logistic": 0.01531620830314251,
+   "pd_xgb": 0.006468210369348526,
+   "features": {
+    "utilization": 0.021678266,
+    "age": 63.0,
+    "late_30_59": 0.0,
+    "debt_ratio": 0.29093308949999996,
+    "monthly_income": 5400.0,
+    "open_credit_lines": 7.0,
+    "late_90": 0.0,
+    "real_estate_loans": 2.0,
+    "late_60_89": 0.0,
+    "dependents": 0.0,
+    "late_code_flag": 0.0,
+    "income_missing": 1.0
+   },
+   "reasons": [],
+   "fixed_factors": [],
+   "options": [],
+   "option_texts": [],
+   "floor": null,
+   "status": null,
+   "number_check": [],
+   "report": "Applicant 46727: APPROVED (estimated default risk 1.5%, cutoff 10%)"
+  },
+  {
+   "idx": 120793,
+   "group": "approved",
+   "true_default": 0,
+   "pd_logistic": 0.02470950769352302,
+   "pd_xgb": 0.011362774297595024,
+   "features": {
+    "utilization": 0.048625544,
+    "age": 37.0,
+    "late_30_59": 0.0,
+    "debt_ratio": 0.17039559,
+    "monthly_income": 6167.0,
+    "open_credit_lines": 4.0,
+    "late_90": 0.0,
+    "real_estate_loans": 1.0,
+    "late_60_89": 0.0,
+    "dependents": 3.0,
+    "late_code_flag": 0.0,
+    "income_missing": 0.0
+   },
+   "reasons": [],
+   "fixed_factors": [],
+   "options": [],
+   "option_texts": [],
+   "floor": null,
+   "status": null,
+   "number_check": [],
+   "report": "Applicant 120793: APPROVED (estimated default risk 2.5%, cutoff 10%)"
+  },
+  {
+   "idx": 92309,
+   "group": "approved",
+   "true_default": 0,
+   "pd_logistic": 0.07470667411919574,
+   "pd_xgb": 0.06901545077562332,
+   "features": {
+    "utilization": 0.5376283,
+    "age": 34.0,
+    "late_30_59": 0.0,
+    "debt_ratio": 0.235642123,
+    "monthly_income": 10986.0,
+    "open_credit_lines": 15.0,
+    "late_90": 0.0,
+    "real_estate_loans": 2.0,
+    "late_60_89": 0.0,
+    "dependents": 4.0,
+    "late_code_flag": 0.0,
+    "income_missing": 0.0
+   },
+   "reasons": [],
+   "fixed_factors": [],
+   "options": [],
+   "option_texts": [],
+   "floor": null,
+   "status": null,
+   "number_check": [],
+   "report": "Applicant 92309: APPROVED (estimated default risk 7.5%, cutoff 10%)"
+  },
+  {
+   "idx": 14622,
+   "group": "approved",
+   "true_default": 0,
+   "pd_logistic": 0.02189756319326303,
+   "pd_xgb": 0.014542417600750923,
+   "features": {
+    "utilization": 0.14171439,
+    "age": 49.0,
+    "late_30_59": 0.0,
+    "debt_ratio": 0.378405151,
+    "monthly_income": 6056.0,
+    "open_credit_lines": 5.0,
+    "late_90": 0.0,
+    "real_estate_loans": 1.0,
+    "late_60_89": 0.0,
+    "dependents": 0.0,
+    "late_code_flag": 0.0,
+    "income_missing": 0.0
+   },
+   "reasons": [],
+   "fixed_factors": [],
+   "options": [],
+   "option_texts": [],
+   "floor": null,
+   "status": null,
+   "number_check": [],
+   "report": "Applicant 14622: APPROVED (estimated default risk 2.2%, cutoff 10%)"
+  }
+ ]
+}
